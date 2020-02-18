@@ -203,8 +203,8 @@ h2.category {
   height: 25px;
   line-height: 24px;
   padding: 0;
-  color: #000;
-  background: radial-gradient(#3ea055, #00fcff);
+  color: #00fcff;
+  background: radial-gradient(#fafafa, #fafafa);
   font-size: 20px;
   border-radius: 50%;
   z-index: 5;
