@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | Clancy</title>
+    <title>new page | Clancy</title>
     <meta name="author" content="Clancy xiao" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -39,6 +39,12 @@
 <script src="/js/lib/preview.js"></script>
 
 
+
+
+
+
+
+<script src="https://s4.zstatic.net/ajax/libs/twikoo/1.6.31/twikoo.all.min.js"></script>
 
 
 
@@ -150,40 +156,35 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>new page</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/10
+        </span>
         
-        <div class="timeline" data-title="newpage">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/3/10</div>
-                <a href="/2025/03/10/new-page/">
-                    <h3>new page</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/3/10</div>
-                <a href="/2025/03/10/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="twikoo-container"></div>
+    </div>
+    
+    
 </div>
 
             <footer id="footer">
@@ -214,6 +215,22 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+<script>
+    twikoo.init({
+        el: "#twikoo-container",
+        envId: "",
+        region: "",
+        path: location.pathname,
+        lang: "",
+    })
+</script>
+
+
     
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"./live2d_models/haruna/22/model.2017.valley.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>
