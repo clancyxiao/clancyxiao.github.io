@@ -1,123 +1,43 @@
-;(function () {
-	
-	"use strict";
-
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
-	};
-
-
-
-
-	var contentWayPoint = function() {
-		var i = 0;
-		$(".animate-box").waypoint( function( direction ) {
-
-			if( direction === "down" && !$(this.element).hasClass("animated-fast") ) {
-				
-				i++;
-
-				$(this.element).addClass("item-animate");
-				setTimeout(function(){
-
-					$("body .animate-box.item-animate").each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data("animate-effect");
-							if ( effect === "fadeIn") {
-								el.addClass("fadeIn animated-fast");
-							} else if ( effect === "fadeInLeft") {
-								el.addClass("fadeInLeft animated-fast");
-							} else if ( effect === "fadeInRight") {
-								el.addClass("fadeInRight animated-fast");
-							} else {
-								el.addClass("fadeInUp animated-fast");
-							}
-
-							el.removeClass("item-animate");
-						},  k * 50, "easeInOutExpo" );
-					});
-					
-				}, 100);
-				
-			}
-
-		} , { offset: "85%" } );
-	};
-
-
-	
-
-	var goToTop = function() {
-
-		$(".js-gotop").on("click", function(event){
-			
-			event.preventDefault();
-
-			$("html, body").animate({
-				scrollTop: $("html").offset().top
-			}, 500, "easeInOutExpo");
-			
-			return false;
-		});
-
-		$(window).scroll(function(){
-
-			var $win = $(window);
-			if ($win.scrollTop() > 200) {
-				$(".js-top").addClass("active");
-			} else {
-				$(".js-top").removeClass("active");
-			}
-
-		});
-	
-	};
-
-
-	// Loading page
-	var loaderPage = function() {
-		$(".fh5co-loader").fadeOut("slow");
-	};
-
-	
-	var parallax = function() {
-
-		if ( !isMobile.any() ) {
-			$(window).stellar({
-				horizontalScrolling: false,
-				hideDistantElements: false, 
-				responsive: true
-
-			});
-		}
-	};
-
-
-	$(function(){
-		contentWayPoint();
-		
-		goToTop();
-		loaderPage();
-		parallax();
-	});
-
-
-}());
+const app = Vue.createApp({
+    mixins: Object.values(mixins),
+    data() {
+        return {
+            loading: true,
+            hiddenMenu: false,
+            showMenuItems: false,
+            menuColor: false,
+            scrollTop: 0,
+            renderers: [],
+        };
+    },
+    created() {
+        window.addEventListener("load", () => {
+            this.loading = false;
+        });
+    },
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll, true);
+        this.render();
+    },
+    methods: {
+        render() {
+            for (let i of this.renderers) i();
+        },
+        handleScroll() {
+            let wrap = this.$refs.homePostsWrap;
+            let newScrollTop = document.documentElement.scrollTop;
+            if (this.scrollTop < newScrollTop) {
+                this.hiddenMenu = true;
+                this.showMenuItems = false;
+            } else this.hiddenMenu = false;
+            if (wrap) {
+                if (newScrollTop <= window.innerHeight - 100) this.menuColor = true;
+                else this.menuColor = false;
+                if (newScrollTop <= 400) wrap.style.top = "-" + newScrollTop / 5 + "px";
+                else wrap.style.top = "-80px";
+            }
+            this.scrollTop = newScrollTop;
+        },
+    },
+});
+app.mount("#layout");
